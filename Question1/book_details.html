@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <script>
+        // Fetch the external JSON file
+        fetch("books_collection.json")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(bookData => {
+                // (a) Title of the first book
+                console.log("Title of the first book:", bookData.books[0].title);
+
+                // (b) Author of the second book
+                console.log("Author of the second book:", bookData.books[1].author);
+
+                // (c) Genres of all books
+                console.log("Genres of all books:");
+                bookData.books.forEach((book, index) => {
+                    console.log(`Book ${index + 1} genres:`, book.genres.join(", "));
+                });
+            })
+            .catch(error => console.error("Error fetching JSON:", error));
+    </script>
+</head>
+<body>
+    <h1>Book Details Console Output</h1>
+    <p>Open the browser console (Inspect > Console) to view the book details.</p>
+</body>
+</html>
